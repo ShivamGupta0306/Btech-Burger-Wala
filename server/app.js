@@ -22,9 +22,9 @@ app.use(session({
     saveUninitialized:false,
 
     cookie:{
-        secure:process.env.NODE.ENV==="development" ? false : true,
-        httpOnly:process.env.NODE.ENV==="development" ? false : true,
-        sameSite:process.env.NODE.ENV==="development" ? false : "none",
+        secure:true,
+        httpOnly:true,
+        sameSite:"none"
     }
 }))
 
@@ -43,7 +43,6 @@ methods:["GET", "POST", "PUT", "DELETE"],}
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
-app.enable("trust proxy");
 
 connectPassport();
 
