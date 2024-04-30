@@ -19,7 +19,13 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-  })
+  cookie:{
+    sameSite:"none",
+    httpOnly:true,
+    secure:true,
+  }
+},
+)
 );
 app.use(cookieParser());
 app.use(express.json());
