@@ -14,6 +14,7 @@ const schema = new mongoose.Schema({
       type: String,
       required: true,
     },
+
     country: {
       type: String,
       required: true,
@@ -27,6 +28,7 @@ const schema = new mongoose.Schema({
       required: true,
     },
   },
+
   orderItems: {
     cheeseBurger: {
       price: {
@@ -38,6 +40,7 @@ const schema = new mongoose.Schema({
         required: true,
       },
     },
+
     vegCheeseBurger: {
       price: {
         type: Number,
@@ -48,6 +51,7 @@ const schema = new mongoose.Schema({
         required: true,
       },
     },
+
     burgerWithFries: {
       price: {
         type: Number,
@@ -67,7 +71,7 @@ const schema = new mongoose.Schema({
   },
 
   paymentMethod: {
-    type: String,
+    type: "String",
     enum: ["COD", "Online"],
     default: "COD",
   },
@@ -76,10 +80,8 @@ const schema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Payment",
   },
+  paidAt: Date,
 
-  paidAt: {
-    Date,
-  },
   itemsPrice: {
     type: Number,
     default: 0,
@@ -96,19 +98,18 @@ const schema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+
   orderStatus: {
     type: String,
     enum: ["Preparing", "Shipped", "Delivered"],
     default: "Preparing",
   },
-  deliveredAt: {
-    Date,
-  },
+
+  deliveredAt: Date,
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 });
-
 
 export const Order = mongoose.model("Order", schema);
