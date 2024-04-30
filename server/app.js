@@ -10,21 +10,17 @@ import orderRoute from "../server/routes/order.js";
 import cors from 'cors';
 
 const app = express();
+export default app;
 
 dotenv.config({
     path:"./config/config.env",
 })
-
+app.enable("trust proxy");
 app.use(session({
     secret:process.env.SESSION_SECRET,
     resave:false,
     saveUninitialized:false,
 
-    cookie:{
-        secure:true,
-        httpOnly:true,
-        sameSite:"none"
-    }
 }))
 
 app.use(cookieParser());
@@ -34,7 +30,7 @@ app.use(urlencoded({
 }))
 app.use(cors({
     credentials:true,
-    origin: 'http://localhost:3000',
+    origin:process.env.FRONTEND_URL,
     methods:["GET", "POST", "PUT", "DELETE"],}
 ))
 
@@ -52,6 +48,3 @@ app.use('/api/v1', orderRoute);
 
 //using error middleware
 app.use(errorMiddleware);
-
-
-export default app;

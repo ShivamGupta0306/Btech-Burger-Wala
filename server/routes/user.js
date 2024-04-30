@@ -9,9 +9,12 @@ router.get('/googleauth', passport.authenticate("google", {
     scope:["profile"],
 }));
 
-router.get('/login', passport.authenticate("google", {
-    successRedirect:process.env.FRONTEND_URL,
-}))
+router.get(
+    "/login",
+    passport.authenticate("google", {
+      successRedirect: process.env.FRONTEND_URL,
+    })
+  );
 
 router.get('/me', isAuthenticated, myProfile);
 
