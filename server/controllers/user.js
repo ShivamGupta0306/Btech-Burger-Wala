@@ -37,9 +37,9 @@ export const getAdminStats = asyncError(async(req, res, next) =>{
 
     const orders = await Order.find({});
 
-    const preparingOrders = order.filter(i => i.orderStatus === "Preparing");
-    const shippedOrders = order.filter(i => i.orderStatus === "Shipped");
-    const deliveredOrders = order.filter(i => i.orderStatus === "Delivered");
+    const preparingOrders = orders.filter(i => i.orderStatus === "Preparing");
+    const shippedOrders = orders.filter(i => i.orderStatus === "Shipped");
+    const deliveredOrders = orders.filter(i => i.orderStatus === "Delivered");
 
 
     let totalIncome = 0;

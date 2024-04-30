@@ -10,7 +10,6 @@ import orderRoute from "../server/routes/order.js";
 import cors from 'cors';
 
 const app = express();
-export default app;
 
 dotenv.config({
     path:"./config/config.env",
@@ -53,3 +52,6 @@ app.use('/api/v1', orderRoute);
 
 //using error middleware
 app.use(errorMiddleware);
+
+
+export default app;
