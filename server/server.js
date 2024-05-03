@@ -3,7 +3,6 @@ import { connectDB } from "./config/database.js";
 import Razorpay from "razorpay";
 import cookieParser from "cookie-parser";
 
-app.use(cookieParser());
 connectDB();
 
 export const instance = new Razorpay({
@@ -11,6 +10,7 @@ export const instance = new Razorpay({
   key_secret: process.env.RAZORPAY_API_SECRET,
 });
 
+app.use(cookieParser());
 app.get("/", (req, res, next) => {
   res.send("<h1>Working</h1>");
 });
