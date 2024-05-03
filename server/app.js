@@ -1,4 +1,4 @@
-import express, { urlencoded } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import { connectPassport } from "./utils/Provider.js";
 import session from "express-session";
@@ -9,30 +9,30 @@ import cors from "cors";
 
 const app = express();
 
-app.use(cookieParser());
-
-export default app;
 dotenv.config({
   path: "./config/config.env",
 });
 
-// Using Middlewares
+// Middleware setup
+app.use(cookieParser());
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-  cookie:{
-    secure:true,
-    httpOnly:true,
-    sameSite:'none',
-  }, proxy:true,
-},
-)
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'none',
+    },
+    proxy: true, // Enable proxy
+  })
 );
+
 app.use(express.json());
 app.use(
-  urlencoded({
+  express.urlencoded({
     extended: true,
   })
 );
@@ -45,11 +45,17 @@ app.use(
   })
 );
 
+// Passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Passport session authentication
 app.use(passport.authenticate("session"));
+
+// Trust proxy
 app.enable("trust proxy");
 
+// Initialize Passport
 connectPassport();
 
 // Importing Routes
@@ -61,3 +67,5 @@ app.use("/api/v1", orderRoute);
 
 // Using Error Middleware
 app.use(errorMiddleware);
+
+export default app;
