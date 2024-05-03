@@ -1,7 +1,9 @@
 import app from "./app.js";
 import { connectDB } from "./config/database.js";
 import Razorpay from "razorpay";
+import cookieParser from "cookie-parser";
 
+app.use(cookieParser());
 connectDB();
 
 export const instance = new Razorpay({
