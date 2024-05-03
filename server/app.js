@@ -20,9 +20,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
   cookie:{
-    sameSite:"none",
-    httpOnly:true,
     secure:true,
+    httpOnly:true,
+    sameSite:"none"
   }
 },
 )
