@@ -8,6 +8,9 @@ import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import cors from "cors";
 
 const app = express();
+
+app.use(cookieParser());
+
 export default app;
 dotenv.config({
   path: "./config/config.env",
@@ -27,7 +30,6 @@ app.use(
 },
 )
 );
-app.use(cookieParser());
 app.use(express.json());
 app.use(
   urlencoded({
